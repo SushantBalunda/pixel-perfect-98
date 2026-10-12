@@ -1,24 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SpaceShell } from "@/components/space/Experience";
+import { About, Certifications, Contact, ExperienceSection, Footer, Hero, Nav, Projects, Skills } from "@/components/space/Sections";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Sushant Balunda — AI Engineer & Full Stack Developer";
+const description = "Portfolio of Sushant Balunda: AI engineering, full stack development and machine learning, presented as a journey through deep space.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({ "@context": "https://schema.org", "@type": "Person", name: "Sushant Balunda", jobTitle: "AI Engineer" }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <SpaceShell>
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <Projects />
+        <ExperienceSection />
+        <Certifications />
+        <Contact />
+      </main>
+      <Footer />
+    </SpaceShell>
   );
 }
