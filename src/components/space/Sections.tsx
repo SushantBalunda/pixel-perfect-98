@@ -126,7 +126,7 @@ export function About() {
 
 export function Skills() {
   const [open, setOpen] = useState(0);
-  const s = skills[open];
+  const s = skills[open] ?? skills[0]!;
   return (
     <section id="skills" className={wrap}>
       <SectionHead eyebrow="02 — Star system" title="Skills" />
